@@ -1,5 +1,5 @@
 import datetime
-from app.main import db
+from app.database import db
 import bcrypt
 
 

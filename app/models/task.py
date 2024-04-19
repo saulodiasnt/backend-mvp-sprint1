@@ -1,6 +1,6 @@
 from enum import Enum
 import datetime
-from app.main import db
+from app.database import db
 
 
 class TaskType(Enum):

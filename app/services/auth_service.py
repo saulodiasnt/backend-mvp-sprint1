@@ -2,7 +2,7 @@ from flask import jsonify
 from datetime import timedelta
 from flask_jwt_extended import create_access_token
 from app.models.user import User
-from app.main import db
+from app.database import db
 from app.shared.erros import NotFoundException, UnauthorizedException
 
 

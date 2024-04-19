@@ -1,6 +1,6 @@
 from app.models.task import Task, TaskType
 from flask import jsonify
-from app.main import db
+from app.database import db
 from app.shared.erros import NotFoundException
 from datetime import datetime
 
