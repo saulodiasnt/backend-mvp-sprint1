@@ -26,7 +26,6 @@ task_bp = APIBlueprint(
 @task_bp.post("/", tags=[task_tag], responses={201: TaskResponseSchema})
 def create_task(body: CreateTaskSchema):
     user_id = g.get("current_user").id
-    print(body.status)
 
     task = TaskService.create_user_task(
         title=body.title,
@@ -64,8 +63,6 @@ def get_task(path: TaskPathSchema):
 def update_task(path: TaskPathSchema, body: UpdateTaskSchema):
     user_id = g.get("current_user").id
     task_id = int(path.task_id)
-
-    print("estou aqui")
 
     task = TaskService.update_user_task(
         task_id=task_id,
