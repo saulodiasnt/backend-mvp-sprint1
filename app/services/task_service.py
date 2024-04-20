@@ -69,7 +69,7 @@ class TaskService:
             date=date if isinstance(date, dateType) else datetime.strptime(date, "%Y-%m-%d").date(),
             start_time=start_time if isinstance(start_time, time) else datetime.strptime(start_time, "%H:%M").time() ,
             end_time=end_time if isinstance(end_time, time) else datetime.strptime(end_time, "%H:%M").time(),
-            type=type.value.upper(),
+            type=type,
         )
         db.session.add(task)
         db.session.commit()

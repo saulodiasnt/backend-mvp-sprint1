@@ -10,4 +10,4 @@ class CreateTaskSchema(BaseModel):
     date: d = Field(None, examples="2021-01-01")
     start_time: time = Field(None, examples="12:00")
     end_time: time = Field(None, examples="13:00")
-    status: Optional[TaskType] = Field(None, examples="study")
+    type: Optional[TaskType] = Field(None, examples="study")

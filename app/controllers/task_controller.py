@@ -8,6 +8,7 @@ from app.schemas import (
     TaskResponseSchema,
 )
 from app.shared.erros import NotFoundException, UnauthorizedException
+from app.models.task import TaskType
 from flask_cors import CORS
 from flask import jsonify
 
@@ -26,7 +27,7 @@ task_bp = APIBlueprint(
 @task_bp.post("/", tags=[task_tag], responses={201: TaskResponseSchema})
 def create_task(body: CreateTaskSchema):
     user_id = g.get("current_user").id
-
+    
     task = TaskService.create_user_task(
         title=body.title,
         description=body.description,
@@ -34,7 +35,7 @@ def create_task(body: CreateTaskSchema):
         date=body.date,
         start_time=body.start_time,
         end_time=body.end_time,
-        type=body.status,
+        type=body.type,
     )
 
     return jsonify(task.to_dict()), 201
@@ -63,7 +64,7 @@ def get_task(path: TaskPathSchema):
 def update_task(path: TaskPathSchema, body: UpdateTaskSchema):
     user_id = g.get("current_user").id
     task_id = int(path.task_id)
-
+    print(body.type)
     task = TaskService.update_user_task(
         task_id=task_id,
         user_id=user_id,
