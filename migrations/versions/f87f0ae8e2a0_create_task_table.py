@@ -1,7 +1,7 @@
 """create task table
 
 Revision ID: f87f0ae8e2a0
-Revises: dd75a657e862
+Revises: 41ed9e9033b7
 Create Date: 2024-04-18 15:03:48.884796
 
 """
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision = "f87f0ae8e2a0"
-down_revision = "dd75a657e862"
+down_revision = "41ed9e9033b7"
 branch_labels = None
 depends_on = None
 
