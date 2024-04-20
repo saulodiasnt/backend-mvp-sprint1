@@ -15,7 +15,6 @@ CORS(auth_bp)
     "/login",
     summary="Authenticates a user by checking the provided email and password.",
     description="Authenticates a user by checking the provided email and password.",
-    
 )
 def login(body: LoginSchema):
     """
@@ -30,16 +29,14 @@ def login(body: LoginSchema):
     Raises:
         Exception: If there is an error during the authentication process.
     """
-    
-    return AuthService.login(body.email, body.password)
 
+    return AuthService.login(body.email, body.password)
 
 
 @auth_bp.post(
     "/register",
     summary="Register a new user.",
     description="Register a new user.",
-    
 )
 def register(body: RegisterSchema):
     """

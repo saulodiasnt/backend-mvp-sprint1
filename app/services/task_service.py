@@ -66,9 +66,21 @@ class TaskService:
             title=title,
             description=description,
             user_id=user_id,
-            date=date if isinstance(date, dateType) else datetime.strptime(date, "%Y-%m-%d").date(),
-            start_time=start_time if isinstance(start_time, time) else datetime.strptime(start_time, "%H:%M").time() ,
-            end_time=end_time if isinstance(end_time, time) else datetime.strptime(end_time, "%H:%M").time(),
+            date=(
+                date
+                if isinstance(date, dateType)
+                else datetime.strptime(date, "%Y-%m-%d").date()
+            ),
+            start_time=(
+                start_time
+                if isinstance(start_time, time)
+                else datetime.strptime(start_time, "%H:%M").time()
+            ),
+            end_time=(
+                end_time
+                if isinstance(end_time, time)
+                else datetime.strptime(end_time, "%H:%M").time()
+            ),
             type=type,
         )
         db.session.add(task)
@@ -107,22 +119,27 @@ class TaskService:
         if not task:
             return NotFoundException().to_dict()
 
-        handle_date = datetime.strptime(date, "%Y-%m-%d").date() if not isinstance(date, dateType) else task.date
-        handle_start_time = datetime.strptime(start_time, "%H:%M").time() if not isinstance(start_time, time) else task.start_time
-        handle_end_time = datetime.strptime(end_time, "%H:%M").time() if not isinstance(end_time, time) else task.end_time    
-
+        handle_date = (
+            datetime.strptime(date, "%Y-%m-%d").date()
+            if not isinstance(date, dateType)
+            else task.date
+        )
+        handle_start_time = (
+            datetime.strptime(start_time, "%H:%M").time()
+            if not isinstance(start_time, time)
+            else task.start_time
+        )
+        handle_end_time = (
+            datetime.strptime(end_time, "%H:%M").time()
+            if not isinstance(end_time, time)
+            else task.end_time
+        )
 
         task.title = title or task.title
         task.description = description or task.description
         task.date = handle_date if date else task.date
-        task.start_time = (
-            handle_start_time
-            if start_time
-            else task.start_time
-        )
-        task.end_time = (
-            handle_end_time if end_time else task.end_time
-        )
+        task.start_time = handle_start_time if start_time else task.start_time
+        task.end_time = handle_end_time if end_time else task.end_time
         task.type = type.name.upper() if type else task.type.name.upper()
 
         db.session.add(task)

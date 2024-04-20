@@ -5,12 +5,15 @@ from app.shared.erros import UnauthorizedException
 
 EXCLUDE_ROUTES = ["/login", "/register", "/openapi"]
 
+
 def configure_cors(app):
     @app.after_request
     def add_cor_headers(response):
         response.headers["Access-Control-Allow-Origin"] = "*"
         response.headers["Access-Control-Allow-Headers"] = "*"
-        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+        response.headers["Access-Control-Allow-Methods"] = (
+            "GET, POST, PUT, DELETE, OPTIONS"
+        )
         return response
 
 
@@ -37,7 +40,7 @@ def auth_check_middleware(app):
                         g.current_user = user
                     else:
                         return UnauthorizedException().to_dict()
-                except Exception as e:
+                except:
                     return UnauthorizedException().to_dict()
 
             else:

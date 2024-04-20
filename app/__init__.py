@@ -14,7 +14,10 @@ jwt = {"type": "http", "scheme": "bearer", "bearerFormat": "JWT"}
 
 security_schemes = {"jwt": jwt}
 
-app = OpenAPI(__name__, security_schemes=security_schemes,)
+app = OpenAPI(
+    __name__,
+    security_schemes=security_schemes,
+)
 app.config["OPENAPI_VERSION"] = "3.0.2"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
 app.config["JWT_SECRET_KEY"] = "super-secret"
@@ -31,4 +34,4 @@ middleware.auth_check_middleware(app)
 app.register_api(task_bp)
 app.register_api(auth_bp)
 
-    # return app
+# return app
